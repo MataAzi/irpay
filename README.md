@@ -13,7 +13,7 @@ Install IRPay with npm
 Or Yarn:
 
 ```bash
-  yarn install irpay
+  yarn add irpay
 ```
 
 PNPM:
