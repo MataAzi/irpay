@@ -1,5 +1,5 @@
-import MemoryStorage from '../storages/Memory';
-import { StorageData } from '../storages/Storage';
+import MemoryStorage from '../../storages/Memory';
+import { StorageData } from '../../storages/Storage';
 
 test('Test Storage Creates Successfull', async () => {
   const data = await MemoryStorage.createNewPay('test 1', []);
