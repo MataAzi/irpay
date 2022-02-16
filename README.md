@@ -50,18 +50,6 @@ const pay = new IRPay(
 );
 ```
 
-### Create Instance Of IRPay 
-```javascript
-const pay = new IRPay(
-  MemoryStorage,
-  IdPayProvider(
-    "6a7f99eb-7c20-4412-a972-6dfb7cd253a4",
-    true,
-    "http://localhost:3000"
-  )
-);
-```
-
 ### Request Pay
 ```javascript 
  // Send Pay Request To Provider (IdPay Here)
