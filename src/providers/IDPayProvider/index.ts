@@ -29,7 +29,7 @@ const sendPayRequest = async (amount: number): Promise<PayCreationResult> => {
   const storage: Storages = Container.get('storage');
   const orderId = randomUUID();
   try {
-    const result = await axiosInstance.post('/payment', { orderId, amount, callback });
+    const result = await axiosInstance.post('/payment', { order_id: orderId, amount, callback });
     await storage.createNewPay(result.data.id, [`order_id:${orderId}`]);
     return { amount, payId: result.data.id, redirect_url: result.data.link };
   } catch (e: any) {
@@ -53,7 +53,7 @@ const checkPayStatus = async (payId: string): Promise<PayCheckResult> => {
       const orderId = orderIdN.split(':')[1];
       const payment = await axiosInstance.post('/payment/inquiry', {
         id: pay.payId,
-        orderId,
+        order_id: orderId,
       });
       const status = PayStatusList.find((o) => o.code.toString() === payment.data.status.toString());
       if (status?.code === 10) return { status: PayStatus.Waiting, code: status!.code.toString() };
@@ -93,7 +93,7 @@ const verifyPay = async (payId: string): Promise<PayVerificationResult> => {
       const orderId = orderIdN.split(':')[1];
       const result = await axiosInstance.post('/payment/verify', {
         id: pay.payId,
-        orderId,
+        order_id: orderId,
       });
       if (result.data.status.toString() === '100') {
         storage.changePayStatus(payId, PayStatus.Successful);
